@@ -1,12 +1,9 @@
 class Solution {
     public int maxAdjacentDistance(int[] nums) {
-        int diff=Math.abs(nums[nums.length-1]-nums[0]);
-
-        for(int i=0;i<nums.length-1; i++){
-            int currentDiff= Math.abs(nums[i+1]-nums[i]);
-            if(currentDiff>diff){
-                diff= currentDiff;
-            }
+        int n = nums.length;
+        int diff = Math.abs(nums[0] - nums[n - 1]);
+        for (int i = 0; i < n - 1; ++i) {
+            diff = Math.max(diff, Math.abs(nums[i] - nums[i + 1]));
         }
         return diff;
     }
