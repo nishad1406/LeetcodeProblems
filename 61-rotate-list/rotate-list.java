@@ -10,26 +10,33 @@
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
-      if(head==null || head.next == null) return head;
-      int count=0;
-      ListNode temp=head;
-      while(temp!=null){
-        count++;
-        temp=temp.next;
-      }
-      for(int i=0;i<k%count;i++){
-        ListNode prev=null;
-        ListNode current=head;
-        ListNode next=current.next;
-        while(next != null){
-           prev=current;
-           current=next;
-           if(next!=null) next=next.next;
+        if (head == null || head.next == null || k == 0)
+            return head;
+
+        // 1. Find the length and the tail node
+        ListNode curr = head;
+        int length = 1;
+        while (curr.next != null) {
+            curr = curr.next;
+            length++;
         }
-          prev.next=null;
-            current.next=head;
-            head=current;
-      }  
-      return head;
+
+        // 2. Connect tail to head to form a cycle
+        curr.next = head;
+
+        // 3. Find the new tail: (length - k % length - 1)th node
+        k = k % length;
+        int stepsToNewTail = length - k;
+
+        ListNode newTail = head;
+        for (int i = 1; i < stepsToNewTail; i++) {
+            newTail = newTail.next;
+        }
+
+        // 4. Break the cycle and return new head
+        ListNode newHead = newTail.next;
+        newTail.next = null;
+
+        return newHead;
     }
 }
