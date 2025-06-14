@@ -10,36 +10,26 @@
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
-        int[] array = convertToArray(head);
-        System.out.println(Arrays.toString(array));
-        int[] a = new int[array.length];
-        for (int i=0;i<array.length ;i++ ) {
-        	a[(i+k)% array.length]=array[i];
+      if(head==null || head.next == null) return head;
+      int count=0;
+      ListNode temp=head;
+      while(temp!=null){
+        count++;
+        temp=temp.next;
+      }
+      for(int i=0;i<k%count;i++){
+        ListNode prev=null;
+        ListNode current=head;
+        ListNode next=current.next;
+        while(next != null){
+           prev=current;
+           current=next;
+           if(next!=null) next=next.next;
         }
-        // System.out.println(Arrays.toString(a));
-        ListNode rt = convertToListNode(a);
-        return rt;
-    }
-
-    public static int[] convertToArray(ListNode head) {
-       List<Integer> list = new ArrayList<>();
-       while (head != null) {
-           list.add(head.val);
-           head = head.next;
-       }
-       return list.stream().mapToInt(i -> i).toArray(); // Convert List<Integer> to int[]
-    }
-
-    public static ListNode convertToListNode(int[] arr) {
-        if (arr.length == 0) return null;
-
-        ListNode dummy = new ListNode(0); // Temporary dummy node
-        ListNode current = dummy;
-
-        for (int num : arr) {
-            current.next = new ListNode(num);
-            current = current.next;
-        }
-        return dummy.next; // Return the actual head
+          prev.next=null;
+            current.next=head;
+            head=current;
+      }  
+      return head;
     }
 }
