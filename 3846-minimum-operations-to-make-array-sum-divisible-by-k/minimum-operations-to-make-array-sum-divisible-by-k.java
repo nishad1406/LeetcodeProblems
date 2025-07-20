@@ -4,6 +4,10 @@ class Solution {
         for(int num: nums){
             sum+=num;
         }
+        sum = sum%k;
+        if(sum == 0){
+            return 0;
+        }
         return sum%k;
     }
 }
