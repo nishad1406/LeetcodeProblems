@@ -1,17 +1,14 @@
 class Solution {
-    //String vowels = "aeiou";
-    int count = 0;
+    int a=1, e=1, i=1, o=1, u=1;
     public int countVowelStrings(int n) {
-        backTrack(n, 0);
-        return count;
+        for(int i=1;i<n;i++)
+        increment();
+        return a+e+i+o+u;
     }
-    private void backTrack(int n, int indexToStart){
-        if(n == 0){
-            count++;
-            return;
-        }
-        for(int i = indexToStart; i < 5; i++){
-            backTrack(n - 1, i);
-        }
+    public void increment(){
+        a = a+e+i+o+u;
+        e = e+i+o+u;
+        i = i+o+u;
+        o = o+u; 
     }
 }
