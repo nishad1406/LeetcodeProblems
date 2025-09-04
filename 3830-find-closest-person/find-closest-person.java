@@ -7,7 +7,7 @@ class Solution {
         if(p1==p2)
             return 0;
 
-        return p1<p2?1:2;
-
+        if(p1<p2) return 1;
+          else  return 2;
     }
 }
