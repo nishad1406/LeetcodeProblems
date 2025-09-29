@@ -7,7 +7,9 @@ class Solution {
             arr[i] = points[i][0];
         }
         Arrays.sort(arr);
-
+        for( int item : arr) System.out.print(item +" ");
+        
+        
         int ans = 0;
         for(int i=1; i<n; i++){
             if (arr[i] - arr[i-1] == 1){
